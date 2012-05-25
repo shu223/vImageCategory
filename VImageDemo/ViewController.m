@@ -123,23 +123,23 @@
         switch (i) {
             case 1:
                 imageView.image = [self.orgImage gaussianBlur];
-                [self saveImage:imageView.image filename:@"1"];
+//                [self saveImage:imageView.image filename:@"1"];
                 break;
             case 2:
                 imageView.image = [self.orgImage edgeDetection];
-                [self saveImage:imageView.image filename:@"2"];
+//                [self saveImage:imageView.image filename:@"2"];
                 break;
             case 3:
                 imageView.image = [self.orgImage emboss];
-                [self saveImage:imageView.image filename:@"3"];
+//                [self saveImage:imageView.image filename:@"3"];
                 break;
             case 4:
                 imageView.image = [self.orgImage sharpen];
-                [self saveImage:imageView.image filename:@"4"];
+//                [self saveImage:imageView.image filename:@"4"];
                 break;
             case 5:
                 imageView.image = [self.orgImage unsharpen];
-                [self saveImage:imageView.image filename:@"5"];
+//                [self saveImage:imageView.image filename:@"5"];
                 break;
             default:
                 break;
