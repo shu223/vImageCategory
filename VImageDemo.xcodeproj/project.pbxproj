@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A3CBD16156FDCFA004D3530 /* lena.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A3CBD15156FDCFA004D3530 /* lena.jpg */; };
+		8A3CBD19156FEE29004D3530 /* lena_256.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A3CBD18156FEE29004D3530 /* lena_256.png */; };
 		8AD905C5156BE8120057E815 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD905C4156BE8120057E815 /* UIKit.framework */; };
 		8AD905C7156BE8120057E815 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD905C6156BE8120057E815 /* Foundation.framework */; };
 		8AD905C9156BE8120057E815 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD905C8156BE8120057E815 /* CoreGraphics.framework */; };
@@ -20,6 +22,11 @@
 		8AD905E5156BE8120057E815 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD905C6156BE8120057E815 /* Foundation.framework */; };
 		8AD905ED156BE8120057E815 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AD905EB156BE8120057E815 /* InfoPlist.strings */; };
 		8AD905F0156BE8120057E815 /* VImageDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD905EF156BE8120057E815 /* VImageDemoTests.m */; };
+		8AD90600156BE89F0057E815 /* UIImage+vImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD905FF156BE89F0057E815 /* UIImage+vImage.m */; };
+		8AD90606156BEA3F0057E815 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD90605156BEA3F0057E815 /* Accelerate.framework */; };
+		8AD90609156BEABD0057E815 /* NYXImagesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD90608156BEABD0057E815 /* NYXImagesHelper.m */; };
+		8AD9060D156BEE4C0057E815 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD9060C156BEE4C0057E815 /* CoreImage.framework */; };
+		8AD90611156BEE9D0057E815 /* m1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AD90610156BEE9D0057E815 /* m1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,25 +40,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A3CBD15156FDCFA004D3530 /* lena.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lena.jpg; sourceTree = "<group>"; };
+		8A3CBD18156FEE29004D3530 /* lena_256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lena_256.png; sourceTree = "<group>"; };
 		8AD905C0156BE8120057E815 /* VImageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VImageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD905C4156BE8120057E815 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8AD905C6156BE8120057E815 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8AD905C8156BE8120057E815 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8AD905CC156BE8120057E815 /* VImageDemo-Info.plist */ = {isa = PBXFileReference; path = "VImageDemo-Info.plist"; sourceTree = "<group>"; };
+		8AD905CC156BE8120057E815 /* VImageDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VImageDemo-Info.plist"; sourceTree = "<group>"; };
 		8AD905CE156BE8120057E815 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8AD905D0156BE8120057E815 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8AD905D2156BE8120057E815 /* VImageDemo-Prefix.pch */ = {isa = PBXFileReference; path = "VImageDemo-Prefix.pch"; sourceTree = "<group>"; };
-		8AD905D3156BE8120057E815 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		8AD905D2156BE8120057E815 /* VImageDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VImageDemo-Prefix.pch"; sourceTree = "<group>"; };
+		8AD905D3156BE8120057E815 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8AD905D4156BE8120057E815 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8AD905D6156BE8120057E815 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		8AD905D6156BE8120057E815 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8AD905D7156BE8120057E815 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8AD905DA156BE8120057E815 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		8AD905E1156BE8120057E815 /* VImageDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VImageDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD905E2156BE8120057E815 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		8AD905EA156BE8120057E815 /* VImageDemoTests-Info.plist */ = {isa = PBXFileReference; path = "VImageDemoTests-Info.plist"; sourceTree = "<group>"; };
+		8AD905EA156BE8120057E815 /* VImageDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VImageDemoTests-Info.plist"; sourceTree = "<group>"; };
 		8AD905EC156BE8120057E815 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8AD905EE156BE8120057E815 /* VImageDemoTests.h */ = {isa = PBXFileReference; path = VImageDemoTests.h; sourceTree = "<group>"; };
+		8AD905EE156BE8120057E815 /* VImageDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VImageDemoTests.h; sourceTree = "<group>"; };
 		8AD905EF156BE8120057E815 /* VImageDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VImageDemoTests.m; sourceTree = "<group>"; };
+		8AD905FE156BE89F0057E815 /* UIImage+vImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+vImage.h"; sourceTree = "<group>"; };
+		8AD905FF156BE89F0057E815 /* UIImage+vImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+vImage.m"; sourceTree = "<group>"; };
+		8AD90605156BEA3F0057E815 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8AD90607156BEABD0057E815 /* NYXImagesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYXImagesHelper.h; sourceTree = "<group>"; };
+		8AD90608156BEABD0057E815 /* NYXImagesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYXImagesHelper.m; sourceTree = "<group>"; };
+		8AD9060C156BEE4C0057E815 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		8AD90610156BEE9D0057E815 /* m1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = m1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AD9060D156BEE4C0057E815 /* CoreImage.framework in Frameworks */,
+				8AD90606156BEA3F0057E815 /* Accelerate.framework in Frameworks */,
 				8AD905C5156BE8120057E815 /* UIKit.framework in Frameworks */,
 				8AD905C7156BE8120057E815 /* Foundation.framework in Frameworks */,
 				8AD905C9156BE8120057E815 /* CoreGraphics.framework in Frameworks */,
@@ -81,6 +99,8 @@
 		8AD905B5156BE8120057E815 = {
 			isa = PBXGroup;
 			children = (
+				8AD9060E156BEE9D0057E815 /* Resources */,
+				8AD905FC156BE89F0057E815 /* libs */,
 				8AD905CA156BE8120057E815 /* VImageDemo */,
 				8AD905E8156BE8120057E815 /* VImageDemoTests */,
 				8AD905C3156BE8120057E815 /* Frameworks */,
@@ -100,6 +120,8 @@
 		8AD905C3156BE8120057E815 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AD9060C156BEE4C0057E815 /* CoreImage.framework */,
+				8AD90605156BEA3F0057E815 /* Accelerate.framework */,
 				8AD905C4156BE8120057E815 /* UIKit.framework */,
 				8AD905C6156BE8120057E815 /* Foundation.framework */,
 				8AD905C8156BE8120057E815 /* CoreGraphics.framework */,
@@ -149,6 +171,43 @@
 				8AD905EB156BE8120057E815 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8AD905FC156BE89F0057E815 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				8AD905FD156BE89F0057E815 /* UIImage+vImage */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		8AD905FD156BE89F0057E815 /* UIImage+vImage */ = {
+			isa = PBXGroup;
+			children = (
+				8AD90607156BEABD0057E815 /* NYXImagesHelper.h */,
+				8AD90608156BEABD0057E815 /* NYXImagesHelper.m */,
+				8AD905FE156BE89F0057E815 /* UIImage+vImage.h */,
+				8AD905FF156BE89F0057E815 /* UIImage+vImage.m */,
+			);
+			path = "UIImage+vImage";
+			sourceTree = "<group>";
+		};
+		8AD9060E156BEE9D0057E815 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8AD9060F156BEE9D0057E815 /* images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8AD9060F156BEE9D0057E815 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8A3CBD18156FEE29004D3530 /* lena_256.png */,
+				8A3CBD15156FDCFA004D3530 /* lena.jpg */,
+				8AD90610156BEE9D0057E815 /* m1.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +282,9 @@
 			files = (
 				8AD905CF156BE8120057E815 /* InfoPlist.strings in Resources */,
 				8AD905DB156BE8120057E815 /* ViewController.xib in Resources */,
+				8AD90611156BEE9D0057E815 /* m1.png in Resources */,
+				8A3CBD16156FDCFA004D3530 /* lena.jpg in Resources */,
+				8A3CBD19156FEE29004D3530 /* lena_256.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +322,8 @@
 				8AD905D1156BE8120057E815 /* main.m in Sources */,
 				8AD905D5156BE8120057E815 /* AppDelegate.m in Sources */,
 				8AD905D8156BE8120057E815 /* ViewController.m in Sources */,
+				8AD90600156BE89F0057E815 /* UIImage+vImage.m in Sources */,
+				8AD90609156BEABD0057E815 /* NYXImagesHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +425,7 @@
 				GCC_PREFIX_HEADER = "VImageDemo/VImageDemo-Prefix.pch";
 				INFOPLIST_FILE = "VImageDemo/VImageDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -372,6 +437,7 @@
 				GCC_PREFIX_HEADER = "VImageDemo/VImageDemo-Prefix.pch";
 				INFOPLIST_FILE = "VImageDemo/VImageDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -429,6 +495,7 @@
 				8AD905F5156BE8120057E815 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8AD905F6156BE8120057E815 /* Build configuration list for PBXNativeTarget "VImageDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +504,7 @@
 				8AD905F8156BE8120057E815 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -2,8 +2,7 @@
 //  VImageDemoTests.m
 //  VImageDemoTests
 //
-//  Created by Shuichi Tsutsumi on 12/05/23.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Shuichi Tsutsumi. All rights reserved.
 //
 
 #import "VImageDemoTests.h"
