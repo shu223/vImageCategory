@@ -8,11 +8,13 @@
 #import "ViewController.h"
 #import "UIImage+vImage.h"
 
-#ifdef THUMBNAIL_BIG
+//#define THUMBNAIL_BIG
+
+#ifndef THUMBNAIL_BIG
 #define kWidth      106
 #define kHeight     106
 #define kInterval   1
-#define kNumRow     3
+#define kNumRow     4
 #define kNumColumn  3
 #else
 #define kWidth      159
@@ -21,6 +23,12 @@
 #define kNumRow     3
 #define kNumColumn  2
 #endif
+
+#define kImageFilaname1 @"bw.png"
+#define kImageFilaname2 @"dog.png"
+#define kImageFilaname3 @"lena.png"
+#define kImageFilaname4 @"dot.png"
+
 
 @interface ViewController ()
 
@@ -43,11 +51,15 @@
         for (int i=0; i<kNumColumn; i++) {
             CGPoint origin = CGPointMake((kWidth + kInterval) * i, (kHeight + kInterval) * j);
             frame.origin = origin;
-            [self generateUIImageViewWithFrame:frame];
+            UIImageView *imageView = [self generateUIImageViewWithFrame:frame];
+            UILabel *label = [self generateUILabelWithFrame:CGRectMake(0, 0, kWidth, 20)];
+            label.adjustsFontSizeToFitWidth = YES;
+            [imageView addSubview:label];
         }
     }
     
-    self.orgImage = [UIImage imageNamed:@"lena_256.png"];
+    self.orgImage = [UIImage imageNamed:kImageFilaname3];
+
     [self reset];
     
     [self.view bringSubviewToFront:self.startBtn];
@@ -76,6 +88,16 @@
     [self.view addSubview:imageView];
     
     return imageView;
+}
+
+- (UILabel *)generateUILabelWithFrame:(CGRect)frame {
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.textAlignment = UITextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor whiteColor];
+    
+    return label;
 }
 
 - (void)reset {
@@ -117,33 +139,69 @@
         if (![aSubview isKindOfClass:[UIImageView class]]) {
             continue;
         }
-            
+
         UIImageView *imageView = (UIImageView *)aSubview;
         
+        NSString *title;
         switch (i) {
+            case 0:
+                title = @"original";
+                break;
             case 1:
                 imageView.image = [self.orgImage gaussianBlur];
-//                [self saveImage:imageView.image filename:@"1"];
+                title = @"gaussianBlur";
                 break;
             case 2:
                 imageView.image = [self.orgImage edgeDetection];
-//                [self saveImage:imageView.image filename:@"2"];
+                title = @"edgeDetection";
                 break;
             case 3:
                 imageView.image = [self.orgImage emboss];
-//                [self saveImage:imageView.image filename:@"3"];
+                title = @"emboss";
                 break;
             case 4:
                 imageView.image = [self.orgImage sharpen];
-//                [self saveImage:imageView.image filename:@"4"];
+                title = @"sharpen";
                 break;
             case 5:
                 imageView.image = [self.orgImage unsharpen];
-//                [self saveImage:imageView.image filename:@"5"];
+                title = @"unsharpen";
+                break;
+            case 6:
+                imageView.image = [self.orgImage rotateInRadians:M_PI_2 * 0.3];
+                title = @"rotate";
+                break;
+            case 7:
+                imageView.image = [self.orgImage dilateWithIterations:3];
+                title = @"dilate";
+                break;
+            case 8:
+                imageView.image = [self.orgImage erodeWithIterations:3];
+                title = @"erode";
+                break;
+            case 9:
+                imageView.image = [self.orgImage gradientWithIterations:3];
+                title = @"gradient";
+                break;
+            case 10:
+                imageView.image = [self.orgImage tophatWithIterations:4];
+                title = @"tophat";
+                break;
+            case 11:
+                imageView.image = [self.orgImage equalization];
+                title = @"equalization";
                 break;
             default:
                 break;
         }
+        
+        
+        for (UIView *aSubSubView in imageView.subviews) {
+            if ([aSubSubView isKindOfClass:[UILabel class]]) {
+                [(UILabel *)aSubSubView setText:title];
+            }
+        }
+
         
         i++;
     }    

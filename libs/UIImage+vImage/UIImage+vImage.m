@@ -1,16 +1,13 @@
 //
 //  UIImage+vImage.m
-//  VImageDemo
 //
-//  Created by Shuichi Tsutsumi on 12/05/23.
-//
-//  本コードはNYXImagesHelperよりvImage関連個所を抽出し修正を加えたものです。
-//  https://github.com/Nyx0uf/NYXImagesKit
+//  Copyright (c) 2012 Shuichi Tsutsumi. All rights reserved.
 //
 
 #import "UIImage+vImage.h"
 #import <Accelerate/Accelerate.h>
-#import "NYXImagesHelper.h"
+#import "UIImage+Blend.h"
+
 
 
 static int16_t gaussianblur_kernel[25] = {
@@ -47,15 +44,33 @@ static int16_t unsharpen_kernel[9] = {
 
 static uint8_t backgroundColorBlack[4] = {0,0,0,0};
 
+static unsigned char morphological_kernel[9] = {
+	1, 1, 1,
+	1, 1, 1,
+	1, 1, 1,
+};
+
+//static unsigned char morphological_kernel[25] = {
+//	0, 1, 1, 1, 0,
+//	1, 1, 1, 1, 1,
+//	1, 1, 1, 1, 1,
+//	1, 1, 1, 1, 1,
+//	0, 1, 1, 1, 0,
+//};
+
 
 @implementation UIImage (vImage)
 
--(UIImage*)gaussianBlur
+
+- (UIImage *)gaussianBlur
 {
 	const size_t width = self.size.width;
 	const size_t height = self.size.height;
-	const size_t bytesPerRow = width * kNyxNumberOfComponentsPerARBGPixel;
-	CGContextRef bmContext = NYXCreateARGBBitmapContext(width, height, bytesPerRow);
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
 	if (!bmContext) 
 		return nil;
     
@@ -87,12 +102,15 @@ static uint8_t backgroundColorBlack[4] = {0,0,0,0};
 	return blurred;
 }
 
--(UIImage*)edgeDetection
+- (UIImage *)edgeDetection
 {
 	const size_t width = self.size.width;
 	const size_t height = self.size.height;
-	const size_t bytesPerRow = width * kNyxNumberOfComponentsPerARBGPixel;
-	CGContextRef bmContext = NYXCreateARGBBitmapContext(width, height, bytesPerRow);
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
 	if (!bmContext) 
 		return nil;
     
@@ -123,12 +141,15 @@ static uint8_t backgroundColorBlack[4] = {0,0,0,0};
     return edged;
 }
 
--(UIImage*)emboss
+- (UIImage *)emboss
 {
 	const size_t width = self.size.width;
 	const size_t height = self.size.height;
-	const size_t bytesPerRow = width * kNyxNumberOfComponentsPerARBGPixel;
-	CGContextRef bmContext = NYXCreateARGBBitmapContext(width, height, bytesPerRow);
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
 	if (!bmContext) 
 		return nil;
     
@@ -161,12 +182,15 @@ static uint8_t backgroundColorBlack[4] = {0,0,0,0};
 	return emboss;
 }
 
--(UIImage*)sharpen
+- (UIImage *)sharpen
 {
 	const size_t width = self.size.width;
 	const size_t height = self.size.height;
-	const size_t bytesPerRow = width * kNyxNumberOfComponentsPerARBGPixel;
-	CGContextRef bmContext = NYXCreateARGBBitmapContext(width, height, bytesPerRow);
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
 	if (!bmContext) 
 		return nil;
     
@@ -198,12 +222,15 @@ static uint8_t backgroundColorBlack[4] = {0,0,0,0};
 	return sharpened;
 }
 
--(UIImage*)unsharpen
+- (UIImage *)unsharpen
 {
 	const size_t width = self.size.width;
 	const size_t height = self.size.height;
-	const size_t bytesPerRow = width * kNyxNumberOfComponentsPerARBGPixel;
-	CGContextRef bmContext = NYXCreateARGBBitmapContext(width, height, bytesPerRow);
+	const size_t bytesPerRow = width * 4;
+
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
 	if (!bmContext) 
 		return nil;
     
@@ -235,15 +262,18 @@ static uint8_t backgroundColorBlack[4] = {0,0,0,0};
 	return unsharpened;
 }
 
--(UIImage*)rotateImagePixelsInRadians:(float)radians
+- (UIImage *)rotateInRadians:(float)radians
 {
 	if (!(&vImageRotate_ARGB8888))
 		return nil;
     
 	const size_t width = self.size.width;
 	const size_t height = self.size.height;
-	const size_t bytesPerRow = width * kNyxNumberOfComponentsPerARBGPixel;
-	CGContextRef bmContext = NYXCreateARGBBitmapContext(width, height, bytesPerRow);
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
 	if (!bmContext) 
 		return nil;
 	
@@ -268,6 +298,168 @@ static uint8_t backgroundColorBlack[4] = {0,0,0,0};
 	CGContextRelease(bmContext);
 	
 	return rotated;
+}
+
+- (UIImage *)dilate
+{
+	const size_t width = self.size.width;
+	const size_t height = self.size.height;
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
+	if (!bmContext) 
+		return nil;
+    
+	CGContextDrawImage(bmContext, (CGRect){.origin.x = 0.0f, .origin.y = 0.0f, .size.width = width, .size.height = height}, self.CGImage); 
+    
+	UInt8* data = (UInt8*)CGBitmapContextGetData(bmContext);
+	if (!data)
+	{
+		CGContextRelease(bmContext);
+		return nil;
+	}
+    
+    const size_t n = sizeof(UInt8) * width * height * 4;
+    void* outt = malloc(n);
+    vImage_Buffer src = {data, height, width, bytesPerRow};
+    vImage_Buffer dest = {outt, height, width, bytesPerRow};
+    vImageDilate_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 3, 3, kvImageCopyInPlace);
+//    vImageDilate_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 5, 5, kvImageCopyInPlace);
+    
+    memcpy(data, outt, n);
+    
+    free(outt);
+    
+	CGImageRef dilatedImageRef = CGBitmapContextCreateImage(bmContext);
+	UIImage* dilated = [UIImage imageWithCGImage:dilatedImageRef];
+    
+	CGImageRelease(dilatedImageRef);
+	CGContextRelease(bmContext);
+    
+	return dilated;
+}
+
+- (UIImage *)erode
+{
+	const size_t width = self.size.width;
+	const size_t height = self.size.height;
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
+	if (!bmContext) 
+		return nil;
+    
+	CGContextDrawImage(bmContext, (CGRect){.origin.x = 0.0f, .origin.y = 0.0f, .size.width = width, .size.height = height}, self.CGImage); 
+    
+	UInt8* data = (UInt8*)CGBitmapContextGetData(bmContext);
+	if (!data)
+	{
+		CGContextRelease(bmContext);
+		return nil;
+	}
+    
+    const size_t n = sizeof(UInt8) * width * height * 4;
+    void* outt = malloc(n);
+    vImage_Buffer src = {data, height, width, bytesPerRow};
+    vImage_Buffer dest = {outt, height, width, bytesPerRow};
+    vImageErode_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 3, 3, kvImageCopyInPlace);
+//    vImageErode_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 5, 5, kvImageCopyInPlace);
+    
+    memcpy(data, outt, n);
+    
+    free(outt);
+    
+	CGImageRef erodedImageRef = CGBitmapContextCreateImage(bmContext);
+	UIImage* eroded = [UIImage imageWithCGImage:erodedImageRef];
+    
+	CGImageRelease(erodedImageRef);
+	CGContextRelease(bmContext);
+    
+	return eroded;
+}
+
+- (UIImage *)dilateWithIterations:(int)iterations {
+    
+    UIImage *dstImage = self;
+    for (int i=0; i<iterations; i++) {
+        dstImage = [dstImage dilate];
+    }
+    return dstImage;
+}
+
+- (UIImage *)erodeWithIterations:(int)iterations {
+
+    UIImage *dstImage = self;
+    for (int i=0; i<iterations; i++) {
+        dstImage = [dstImage erode];
+    }
+    return dstImage;
+}
+
+- (UIImage *)gradientWithIterations:(int)iterations {
+    
+    UIImage *dilated = [self dilateWithIterations:iterations];
+    UIImage *eroded = [self erodeWithIterations:iterations];
+    
+    UIImage *dstImage = [dilated imageBlendedWithImage:eroded blendMode:kCGBlendModeDifference alpha:1.0];
+    
+    return dstImage;
+}
+
+- (UIImage *)tophatWithIterations:(int)iterations {
+    
+    UIImage *dilated = [self dilateWithIterations:iterations];
+    
+    UIImage *dstImage = [self imageBlendedWithImage:dilated blendMode:kCGBlendModeDifference alpha:1.0];
+    
+    return dstImage;
+}
+
+- (UIImage *)blackhatWithIterations:(int)iterations {
+
+    UIImage *eroded = [self erodeWithIterations:iterations];
+    
+    UIImage *dstImage = [eroded imageBlendedWithImage:self blendMode:kCGBlendModeDifference alpha:1.0];
+    
+    return dstImage;
+}
+
+- (UIImage *)equalization
+{
+	const size_t width = self.size.width;
+	const size_t height = self.size.height;
+	const size_t bytesPerRow = width * 4;
+    
+    CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+	CGContextRef bmContext = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, space, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(space);
+	if (!bmContext) 
+		return nil;
+    
+	CGContextDrawImage(bmContext, (CGRect){.origin.x = 0.0f, .origin.y = 0.0f, .size.width = width, .size.height = height}, self.CGImage); 
+    
+	UInt8* data = (UInt8*)CGBitmapContextGetData(bmContext);
+	if (!data)
+	{
+		CGContextRelease(bmContext);
+		return nil;
+	}
+    
+    vImage_Buffer src = {data, height, width, bytesPerRow};
+    vImage_Buffer dest = {data, height, width, bytesPerRow};
+    vImageEqualization_ARGB8888(&src, &dest, kvImageNoFlags);
+    
+	CGImageRef destImageRef = CGBitmapContextCreateImage(bmContext);
+	UIImage* destImage = [UIImage imageWithCGImage:destImageRef];
+    
+	CGImageRelease(destImageRef);
+	CGContextRelease(bmContext);
+    
+	return destImage;
 }
 
 @end

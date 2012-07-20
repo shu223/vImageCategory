@@ -1,22 +1,33 @@
 //
 //  UIImage+vImage.h
-//  VImageDemo
 //
-//  Created by Shuichi Tsutsumi on 12/05/23.
-//
-//  本コードはNYXImagesHelperよりvImage関連個所を抽出し修正を加えたものです。
-//  https://github.com/Nyx0uf/NYXImagesKit
+//  Copyright (c) 2012 Shuichi Tsutsumi. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UIImage (vImage)
 
--(UIImage*)gaussianBlur;
--(UIImage*)edgeDetection;
--(UIImage*)emboss;
--(UIImage*)sharpen;
--(UIImage*)unsharpen;
--(UIImage*)rotateImagePixelsInRadians:(float)radians;
+// Convolution Oprations
+- (UIImage *)gaussianBlur;
+- (UIImage *)edgeDetection;
+- (UIImage *)emboss;
+- (UIImage *)sharpen;
+- (UIImage *)unsharpen;
+
+// Geometric Operations
+- (UIImage *)rotateInRadians:(float)radians;
+
+// Morphological Operations
+- (UIImage *)dilate;
+- (UIImage *)erode;
+- (UIImage *)dilateWithIterations:(int)iterations;
+- (UIImage *)erodeWithIterations:(int)iterations;
+- (UIImage *)gradientWithIterations:(int)iterations;
+- (UIImage *)tophatWithIterations:(int)iterations;
+- (UIImage *)blackhatWithIterations:(int)iterations;
+
+// Histogram Operations
+- (UIImage *)equalization;
 
 @end
