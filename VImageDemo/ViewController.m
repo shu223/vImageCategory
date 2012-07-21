@@ -9,6 +9,7 @@
 #import "UIImage+vImage.h"
 
 //#define THUMBNAIL_BIG
+//#define SAVE_IMAGE
 
 #ifndef THUMBNAIL_BIG
 #define kWidth      106
@@ -201,6 +202,10 @@
                 [(UILabel *)aSubSubView setText:title];
             }
         }
+        
+#ifdef SAVE_IMAGE
+        [self saveImage:imageView.image filename:title];
+#endif
 
         
         i++;

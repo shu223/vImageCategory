@@ -326,7 +326,6 @@ static unsigned char morphological_kernel[9] = {
     vImage_Buffer src = {data, height, width, bytesPerRow};
     vImage_Buffer dest = {outt, height, width, bytesPerRow};
     vImageDilate_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 3, 3, kvImageCopyInPlace);
-//    vImageDilate_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 5, 5, kvImageCopyInPlace);
     
     memcpy(data, outt, n);
     
@@ -366,8 +365,8 @@ static unsigned char morphological_kernel[9] = {
     void* outt = malloc(n);
     vImage_Buffer src = {data, height, width, bytesPerRow};
     vImage_Buffer dest = {outt, height, width, bytesPerRow};
+
     vImageErode_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 3, 3, kvImageCopyInPlace);
-//    vImageErode_ARGB8888(&src, &dest, 0, 0, morphological_kernel, 5, 5, kvImageCopyInPlace);
     
     memcpy(data, outt, n);
     
@@ -451,6 +450,7 @@ static unsigned char morphological_kernel[9] = {
     
     vImage_Buffer src = {data, height, width, bytesPerRow};
     vImage_Buffer dest = {data, height, width, bytesPerRow};
+    
     vImageEqualization_ARGB8888(&src, &dest, kvImageNoFlags);
     
 	CGImageRef destImageRef = CGBitmapContextCreateImage(bmContext);
