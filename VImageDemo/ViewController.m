@@ -97,6 +97,7 @@
     label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"Futura-Medium" size:17.0f];
     
     return label;
 }
